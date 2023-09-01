@@ -37,7 +37,7 @@ for (pkg, data) in tutorials
         filename =
         Literate.notebook(
             joinpath(root, input_filename),
-            @__DIR__;
+            joinpath(@__DIR__, "notebooks");
             nname = output,
             execute = false,
             preprocess = admonitions,
