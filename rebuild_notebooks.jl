@@ -4,18 +4,18 @@ import Literate
 
 tutorials = Dict(
     JuMP => [
-        "getting_started" => "docs/src/tutorials/getting_started/getting_started_with_julia.jl",
-        "knapsack" => "docs/src/tutorials/linear/knapsack.jl",
-        "diet" => "docs/src/tutorials/linear/diet.jl",
-        "rocket" => "docs/src/tutorials/nonlinear/rocket_control.jl",
-        "multi_objective" => "docs/src/tutorials/linear/multi_objective_knapsack.jl",
-        "cutting_stock" => "docs/src/tutorials/algorithms/cutting_stock_column_generation.jl",
-        "two_stage_stochastic" => "docs/src/tutorials/applications/two_stage_stochastic.jl",
+        "00_getting_started" => "docs/src/tutorials/getting_started/getting_started_with_julia.jl",
+        "01_knapsack" => "docs/src/tutorials/linear/knapsack.jl",
+        "02_diet" => "docs/src/tutorials/linear/diet.jl",
+        "03_rocket" => "docs/src/tutorials/nonlinear/rocket_control.jl",
+        "04_multi_objective" => "docs/src/tutorials/linear/multi_objective_knapsack.jl",
+        "05_cutting_stock" => "docs/src/tutorials/algorithms/cutting_stock_column_generation.jl",
+        "06_two_stage_stochastic" => "docs/src/tutorials/applications/two_stage_stochastic.jl",
     ],
     SDDP => [
-        "mdps" => "docs/src/tutorial/mdps.jl",
-        "milk_producer" => "docs/src/tutorial/example_milk_producer.jl",
-        "hydro_thermal" => "docs/src/tutorial/example_reservoir.jl",
+        "07_mdps" => "docs/src/tutorial/mdps.jl",
+        "08_hydro_thermal" => "docs/src/tutorial/example_reservoir.jl",
+        "09_milk_producer" => "docs/src/tutorial/example_milk_producer.jl",
     ],
 )
 
@@ -31,14 +31,14 @@ function admonitions(str)
     return str
 end
 
+rm(joinpath(@__DIR__, "notebooks"); force = true, recursive = true)
 for (pkg, data) in tutorials
     root = dirname(dirname(pathof(pkg)))
     for (output, input_filename) in data
-        filename =
         Literate.notebook(
             joinpath(root, input_filename),
             joinpath(@__DIR__, "notebooks");
-            nname = output,
+            name = output,
             execute = false,
             preprocess = admonitions,
             credit = false,
