@@ -10,12 +10,13 @@ tutorials = Dict(
         "03_rocket" => "docs/src/tutorials/nonlinear/rocket_control.jl",
         "04_multi_objective" => "docs/src/tutorials/linear/multi_objective_knapsack.jl",
         "05_cutting_stock" => "docs/src/tutorials/algorithms/cutting_stock_column_generation.jl",
-        "06_two_stage_stochastic" => "docs/src/tutorials/applications/two_stage_stochastic.jl",
-    ],
+        "07_design_patterns_for_larger_models" => "docs/src/tutorials/getting_started/design_patterns_for_larger_models.jl",
+        "10_two_stage_stochastic" => "docs/src/tutorials/applications/two_stage_stochastic.jl",
+        ],
     SDDP => [
-        "07_mdps" => "docs/src/tutorial/mdps.jl",
-        "08_hydro_thermal" => "docs/src/tutorial/example_reservoir.jl",
-        "09_milk_producer" => "docs/src/tutorial/example_milk_producer.jl",
+        "11_mdps" => "docs/src/tutorial/mdps.jl",
+        "12_hydro_thermal" => "docs/src/tutorial/example_reservoir.jl",
+        "13_milk_producer" => "docs/src/tutorial/example_milk_producer.jl",
     ],
 )
 
