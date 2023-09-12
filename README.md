@@ -23,6 +23,8 @@ To get started, you first need to install Julia.
  - Download and install the **Current stable release** version of Julia from
    [https://julialang.org/downloads/](https://julialang.org/downloads/).
 
+If you cannot install locally, see the "Google Colab" instructions below.
+
 ### Common problems
 
  - If you use Windows, choose the 64-bit installer
@@ -160,3 +162,46 @@ only thing that will change are the Jupyter notebooks.
 
 Download a new copy of the zip file, and then copy-paste the new notebooks into
 the old directory. There is no need to re-run the other installation steps.
+
+## Google Colab
+
+Import one of the notebooks by providing the link to the GitHub repository:
+```
+https://github.com/odow/SESO2023
+```
+
+### Install Julia
+
+You will get a warning that the kernel `julia-1.9` is not recognized, defaulting
+to `python3`. This is because Julia is not officially supported by Google Colab.
+
+To install Julia, create a new code cell at the top of the notebook, and run:
+```
+%%shell
+set -e
+wget -nv https://raw.githubusercontent.com/odow/SESO2023/main/install_colab.sh -O /tmp/install_colab.sh
+bash /tmp/install_colab.sh  # Can take a few minutes
+```
+Reload the page, then go `Runtime > Change runtime type > Julia 1.9.3`. When I
+tried this, two "Julia 1.9.3" appeared, and I had to click the bottom one.
+
+### Install packages
+
+We also need to install the various packages.
+
+You can either create a new code cell and manually specify the packages that
+need installing via `Pkg.add`, for example:
+```julia
+import Pkg; Pkg.add(["JuMP", "HiGHS"])
+```
+
+Or you can download the `Project.toml` file from the GitHub repo and install
+all the packages in one go. This can take a few minutes to install and compile
+everything.
+
+```julia
+import Downloads, Pkg
+Downloads.download("https://raw.githubusercontent.com/odow/SESO2023/main/Project.toml", "/tmp/Project.toml")
+Pkg.activate("/tmp/Project.toml")
+Pkg.instantiate()  # Can take ~ 5 minutes
+```
