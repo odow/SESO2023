@@ -10,7 +10,7 @@ if [ -z `which julia` ]; then
   rm /tmp/julia.tar.gz
   # Install kernel and rename it to "julia"
   echo "Installing IJulia kernel..."
-  KERNEL_DIR=`julia -e "import Pkg; Pkg.add("IJulia"); using IJulia; IJulia.installkernel("julia"); print(IJulia.kerneldir())"`
+  KERNEL_DIR=`julia -e 'import Pkg; Pkg.add("IJulia"); using IJulia; IJulia.installkernel("julia"); print(IJulia.kerneldir())'` &> /dev/null
   KERNEL_NAME=`ls -d "$KERNEL_DIR"/julia*`
   mv -f $KERNEL_NAME "$KERNEL_DIR"/julia  
   echo ''
