@@ -165,12 +165,15 @@ the old directory. There is no need to re-run the other installation steps.
 
 ## Google Colab
 
-Import one of the notebooks by providing the link to the GitHub repository:
+Open [http://colab.research.google.com/](http://colab.research.google.com/)
+and import one of the notebooks by providing the link to the GitHub repository:
 ```
 https://github.com/odow/SESO2023
 ```
 
 ### Install Julia
+
+Click "Connect" in the top-right corner.
 
 You will get a warning that the kernel `julia-1.9` is not recognized, defaulting
 to `python3`. This is because Julia is not officially supported by Google Colab.
@@ -180,10 +183,9 @@ To install Julia, create a new code cell at the top of the notebook, and run:
 %%shell
 set -e
 wget -nv https://raw.githubusercontent.com/odow/SESO2023/main/install_colab.sh -O /tmp/install_colab.sh
-bash /tmp/install_colab.sh  # Can take a few minutes
+bash /tmp/install_colab.sh  # Takes ~ 2 minutes
 ```
-Reload the page, then go `Runtime > Change runtime type > Julia 1.9.3`. When I
-tried this, two "Julia 1.9.3" appeared, and I had to click the bottom one.
+Reload the page to load the notebook with the correct kernel.
 
 ### Install packages
 
@@ -192,7 +194,7 @@ We also need to install the various packages.
 You can either create a new code cell and manually specify the packages that
 need installing via `Pkg.add`, for example:
 ```julia
-import Pkg; Pkg.add(["JuMP", "HiGHS"])
+import Pkg; Pkg.add(["JuMP", "HiGHS"])  # Can take ~ 5 minutes
 ```
 
 Or you can download the `Project.toml` file from the GitHub repo and install
@@ -203,5 +205,12 @@ everything.
 import Downloads, Pkg
 Downloads.download("https://raw.githubusercontent.com/odow/SESO2023/main/Project.toml", "/tmp/Project.toml")
 Pkg.activate("/tmp/Project.toml")
-Pkg.instantiate()  # Can take ~ 5 minutes
+Pkg.instantiate()  # Can take ~ 7 minutes
 ```
+
+### Common problems
+
+ - Because each notebook runs in a self-contained virtual machine, you need
+   to re-install Julia and all of the packages every time you start Colab.
+   If you use Colab frequently and have a solution to this problem, please
+   let me know.
