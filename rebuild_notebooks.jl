@@ -10,7 +10,7 @@ tutorials = Dict(
         "03_rocket" => "docs/src/tutorials/nonlinear/rocket_control.jl",
         "04_multi_objective" => "docs/src/tutorials/linear/multi_objective_knapsack.jl",
         "05_cutting_stock" => "docs/src/tutorials/algorithms/cutting_stock_column_generation.jl",
-        "07_design_patterns_for_larger_models" => "docs/src/tutorials/getting_started/design_patterns_for_larger_models.jl",
+        "06_design_patterns_for_larger_models" => "docs/src/tutorials/getting_started/design_patterns_for_larger_models.jl",
         "10_two_stage_stochastic" => "docs/src/tutorials/applications/two_stage_stochastic.jl",
         ],
     SDDP => [
@@ -29,6 +29,7 @@ function admonitions(str)
     str = admonition(str, "Tip")
     str = admonition(str, "Warning")
     str = admonition(str, "Info")
+    str = replace(str, "  #hide" => "")
     return str
 end
 
