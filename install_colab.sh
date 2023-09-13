@@ -11,7 +11,7 @@ if [ -z `which julia` ]; then
   # Install kernel and rename it to "julia"
   echo "Installing IJulia kernel..."
   julia -e 'import Pkg; Pkg.add("IJulia"); Pkg.precompile();' &> /dev/null
-  julia -e 'import IJulia; IJulia.installkernel("julia")' &> /dev/null
+  julia -e 'import IJulia; IJulia.installkernel("julia"; env = Dict("JULIA_NUM_THREADS" => "4"))' &> /dev/null
   KERNEL_DIR=`julia -e 'import IJulia; print(IJulia.kerneldir())'`
   KERNEL_NAME=`ls -d "$KERNEL_DIR"/julia*`
   mv -f $KERNEL_NAME "$KERNEL_DIR"/julia  
