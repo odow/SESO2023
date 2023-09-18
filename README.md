@@ -166,7 +166,8 @@ the old directory. There is no need to re-run the other installation steps.
 ## Google Colab
 
 Open [http://colab.research.google.com/](http://colab.research.google.com/)
-and import one of the notebooks by providing the link to the GitHub repository:
+and import one of the `colab_xxx` notebooks by providing the link to the GitHub
+repository:
 ```
 https://github.com/odow/SESO2023
 ```

@@ -48,3 +48,47 @@ for (pkg, data) in tutorials
         )
     end
 end
+
+# concat one big notebook for colab
+
+function concat_for_colab(output, inputs)
+    dir = mktempdir()
+    filename = joinpath(dir, "uber_tutorial.jl")
+    open(filename, "a") do io
+        println(io, """
+        # Run this cell once
+
+        %%shell
+        set -e
+        wget -nv https://raw.githubusercontent.com/odow/SESO2023/main/install_colab.sh -O /tmp/install_colab.sh
+        bash /tmp/install_colab.sh  # Takes ~ 2 minutes
+
+        # Then refresh the page... and run this cell once
+
+        import Downloads, Pkg
+        Downloads.download("https://raw.githubusercontent.com/odow/SESO2023/main/Project.toml", "/tmp/Project.toml")
+        Pkg.activate("/tmp/Project.toml")
+        Pkg.instantiate()  # Can take ~ 7 minutes
+        """)
+        for file in [
+            joinpath(dirname(dirname(pathof(pkg))), input_filename)
+            for (pkg, data) in tutorials
+            for (output, input_filename) in data
+            if any(s -> startswith(output, s), inputs)
+    ]
+            write(io, read(file, String))
+            write(io, "\n\n")
+        end
+    end
+    Literate.notebook(
+        filename,
+        joinpath(@__DIR__, "notebooks");
+        name = output,
+        execute = false,
+        preprocess = admonitions,
+        credit = false,
+    )
+end
+
+concat_for_colab("colab_julia_days", ["01", "02", "03", "04", "05", "06"])
+concat_for_colab("colab_seso", ["1", "01", "02"])
