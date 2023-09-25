@@ -17,7 +17,6 @@ tutorials = Dict(
         "11_newsvendor" => "docs/src/tutorial/example_newsvendor.jl",
         "12_hydro_thermal" => "docs/src/tutorial/example_reservoir.jl",
         "13_milk_producer" => "docs/src/tutorial/example_milk_producer.jl",
-        "14_theory" => "docs/src/explanation/theory_intro.jl",
     ],
 )
 
