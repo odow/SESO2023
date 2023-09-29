@@ -2,7 +2,7 @@ import JuMP
 import SDDP
 import Literate
 
-tutorials = Dict(
+tutorials = [
     JuMP => [
         "00_getting_started" => "docs/src/tutorials/getting_started/getting_started_with_julia.jl",
         "01_knapsack" => "docs/src/tutorials/linear/knapsack.jl",
@@ -18,11 +18,28 @@ tutorials = Dict(
         "12_hydro_thermal" => "docs/src/tutorial/example_reservoir.jl",
         "13_milk_producer" => "docs/src/tutorial/example_milk_producer.jl",
     ],
-)
+]
 
 function admonition(str, name)
     return replace(str, "!!! $(lowercase(name))" => "**$name**")
 end
+
+const HYDRO_BLOCK = """
+SDDP.plot(
+    plot,
+    "spaghetti_plot.html";
+    ## We need this to build the documentation. Set to true if running locally.
+    open = false,
+)
+
+# ```@raw html
+# <iframe src="../spaghetti_plot.html" style="width:100%;height:500px;"></iframe>
+# ```
+
+# **Info**
+#     If you have trouble viewing the plot, you can
+#     [open it in a new window](spaghetti_plot.html).
+"""
 
 function admonitions(str)
     str = admonition(str, "Note")
@@ -30,6 +47,13 @@ function admonitions(str)
     str = admonition(str, "Warning")
     str = admonition(str, "Info")
     str = replace(str, "  #hide" => "")
+    str = replace(str, "\\underbar" => "\\underline")
+    str = replace(str, " \\\$" => " \\\\\$")
+    str = replace(
+        str,
+        HYDRO_BLOCK => """SDDP.plot(plot, "spaghetti_plot.html")""",
+    )
+
     return str
 end
 
@@ -47,6 +71,8 @@ for (pkg, data) in tutorials
         )
     end
 end
+
+# \$ -> \$\$
 
 # concat one big notebook for colab
 
