@@ -140,6 +140,7 @@ purpose). You're now ready to follow along with the live training.
 
  - Don't start Jupyter via Anaconda! There are some version differences that
    cause problems.
+ - If you encounter `install Jupyter via Conda, y/n? [y]:`, press the `y` key
 
 ## Updating the materials
 
